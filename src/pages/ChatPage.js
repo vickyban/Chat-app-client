@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Route } from 'react-router-dom';
 
 // components
 import ChatInput from '../components/ChatInput';
 import ChatRoomInput from '../components/ChatRoomInput';
+import RoomList from '../components/RoomList';
+import ChatWindow from '../components/ChatWindow';
 // actions
 import { addNewMessage, updateRoomList } from '../redux-store/chatroom/action';
 
@@ -54,6 +57,7 @@ class ChatPage extends Component {
   }
 
   joinRoom = roomName => {
+    if (this.props.current_room === roomName) return;
     const roomInfo = {
       username: 'poyo',
       roomName: roomName
@@ -102,13 +106,17 @@ class ChatPage extends Component {
   }
 
   render() {
+    const { match } = this.props;
     return (
       <div>
+        <RoomList join={this.joinRoom} base_url={match.url} />
         <ChatRoomInput joinRoom={this.joinRoom} />
         <ChatInput
           send={this.send}
           handleTyping={this.handleTyping}
         />
+
+        <Route path={`${match.path}/:roomId`} component={ChatWindow} />
       </div>
     )
   }

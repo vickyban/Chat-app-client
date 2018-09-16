@@ -2,8 +2,8 @@ import { NEW_TEXT, ROOM_LIST } from "../chatroom/action";
 
 const initialState = {
   messages: [],
-  rooms: ['general'],
-  current_room: 'general',
+  rooms: [],
+  current_room: '',
   onlineUsers: [],
 };
 
