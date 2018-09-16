@@ -1,9 +1,10 @@
-import { NEW_TEXT } from "../chatroom/action";
+import { NEW_TEXT, ROOM_LIST } from "../chatroom/action";
 
 const initialState = {
   messages: [],
+  rooms: ['general'],
+  current_room: 'general',
   onlineUsers: [],
-  typingUsers: []
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +14,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         messages: [...state.messages, data],
+      };
+    case ROOM_LIST:
+      return {
+        ...state,
+        rooms: data.rooms,
+        current_room: data.current_room
       }
     default:
       return state;
