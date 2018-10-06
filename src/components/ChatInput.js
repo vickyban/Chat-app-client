@@ -19,10 +19,12 @@ export default class ChatInput extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSend}>
-        <input type='text' ref={input => this.text = input} onChange={this.handleChange} required />
-        <input type='submit' value='Send' />
-      </form>
+      <div id="chat-input">
+        <form onSubmit={this.handleSend}>
+          <textarea type='text' ref={input => this.text = input} onChange={this.handleChange} required />
+          <input type='submit' value='Send' />
+        </form>
+      </div>
     )
   }
 }

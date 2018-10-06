@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route } from 'react-router-dom';
+import '../style/chatStyle.css';
 
 // components
 import ChatInput from '../components/ChatInput';
@@ -44,11 +45,12 @@ class ChatPage extends Component {
     const message = {
       username: 'poyo',
       text,
-      room: current_room,
+      room_name: current_room,
+      timestamp: Date.now()
     };
     console.log("About to send:", message);
     this.state.client.send(message);
-    this.state.client.setTypingState("someone", false)
+    this.state.client.setTypingState("someone", this.props.current_room, false)
     this.props.addNewMessage(message);
     if (this.timeOut) {
       clearTimeout(this.timeOut);
@@ -108,15 +110,14 @@ class ChatPage extends Component {
   render() {
     const { match } = this.props;
     return (
-      <div>
+      <div id='chat-page'>
         <RoomList join={this.joinRoom} base_url={match.url} />
+        <Route path={`${match.path}/:roomId`} component={ChatWindow} />
         <ChatRoomInput joinRoom={this.joinRoom} />
         <ChatInput
           send={this.send}
           handleTyping={this.handleTyping}
         />
-
-        <Route path={`${match.path}/:roomId`} component={ChatWindow} />
       </div>
     )
   }

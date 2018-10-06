@@ -19,11 +19,13 @@ export default class ChatRoomInput extends Component {
 
   render() {
     return (
-      <form onSubmit={this.disableSubmit}>
-        <input text="text" ref={input => this.roomName = input} required />
-        {/* <button type="button" name="createRoom" onClick={this.handleSubmit}>Create Room</button> */}
-        <button type="button" name="joinRoom" onClick={this.handleSubmit}>Join Room</button>
-      </form>
+      <div id="room-input">
+        <form onSubmit={this.disableSubmit}>
+          <input text="text" ref={input => this.roomName = input} required />
+          {/* <button type="button" name="createRoom" onClick={this.handleSubmit}>Create Room</button> */}
+          <button type="button" name="joinRoom" onClick={this.handleSubmit}>Join Room</button>
+        </form>
+      </div>
     )
   }
 }
